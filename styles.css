@@ -1,0 +1,639 @@
+/* =====================================================================
+   WRIGHTSITE — chavonwright.com
+   Fresh build · Wright26 Brand Package design system
+   "Loud & Legible" · light mode only · strict 13pt (17.33px) minimum
+   Palette: Frost Blush · Dusty Rose · Honey Tan · Navy Blue · Greige ·
+           Fern · Drab Rust · Cocoa Ink
+   Type:   Bricolage Grotesque (display) · Atkinson Hyperlegible (body) ·
+           Space Mono (labels/dates)
+   ===================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&family=Bricolage+Grotesque:wght@500;700;800&family=Space+Mono:wght@400;700&display=swap');
+
+/* ------------------------------------------------------------------
+   1. Brand tokens
+   ------------------------------------------------------------------ */
+:root {
+  /* Core palette (Wright26 Brand Package) */
+  --frost:   #F7E5E0; /* Frost Blush  — page background */
+  --brick:   #B39A9A; /* Dusty Rose   */
+  --gold:    #D4A762; /* Honey Tan    */
+  --royal:   #14264D; /* Navy Blue    */
+  --uv:      #14264D; /* Navy Blue (brand alias) */
+  --greige:  #C4B9AC; /* Greige       */
+  --lime:    #5F7F4B; /* Fern         */
+  --sienna:  #94533F; /* Drab Rust    */
+  --ink:     #3A2C2A; /* Cocoa Ink    — text + borders */
+  --white:   #FFFFFF;
+
+  /* Layout */
+  --max-width: 1240px;
+  --radius:    10px;
+  --radius-lg: 14px;
+  --border:    2px solid var(--ink);
+
+  /* Hard offset shadows */
+  --shadow-sm: 3px 3px 0 var(--ink);
+  --shadow-md: 4px 4px 0 var(--ink);
+  --shadow-lg: 5px 5px 0 var(--ink);
+
+  /* Type families */
+  --font-display: 'Bricolage Grotesque', sans-serif;
+  --font-body:    'Atkinson Hyperlegible', system-ui, -apple-system, sans-serif;
+  --font-mono:    'Space Mono', monospace;
+
+  /* Strict 13pt minimum */
+  --min-size: 17.33px;
+}
+
+/* ------------------------------------------------------------------
+   2. Reset & base
+   ------------------------------------------------------------------ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { font-size: 16px; scroll-behavior: smooth; }
+
+body {
+  background-color: var(--frost);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1.083rem;
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Strict 13pt (17.33px) minimum across all text elements */
+p, a, span, li, td, th, button, input, label, small, figcaption, cite, code, pre, div {
+  font-size: max(1.083rem, var(--min-size));
+}
+
+img { max-width: 100%; display: block; }
+
+/* ------------------------------------------------------------------
+   3. Typography
+   ------------------------------------------------------------------ */
+h1, h2, h3, .font-display {
+  font-family: var(--font-display);
+  font-weight: 800;
+  color: var(--ink);
+}
+h1 { font-size: clamp(2.1rem, 4vw, 3.1rem); line-height: 1.08; letter-spacing: -0.02em; }
+h2 { font-size: clamp(1.55rem, 2.5vw, 2.05rem); line-height: 1.15; }
+h3 { font-size: 1.32rem; line-height: 1.22; }
+
+a {
+  color: var(--royal);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  font-weight: 700;
+}
+a:hover, a:focus-visible {
+  color: var(--sienna);
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+:focus-visible { outline: 3px solid var(--sienna); outline-offset: 2px; }
+
+strong { font-weight: 700; }
+em { font-style: italic; }
+
+/* ------------------------------------------------------------------
+   4. Sticky single-line header & navigation (Wright26 bar)
+   ------------------------------------------------------------------ */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 900;
+  background-color: var(--white);
+  border-bottom: var(--border);
+  width: 100%;
+}
+
+.nav-container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: nowrap;
+}
+
+.brand-link {
+  font-family: var(--font-display);
+  font-weight: 800;
+  color: var(--ink);
+  text-decoration: none;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px 14px;
+  background-color: var(--frost);
+  border: var(--border);
+  border-radius: 999px;
+  box-shadow: var(--shadow-sm);
+  transition: background-color 0.15s ease, color 0.15s ease, transform 0.12s ease;
+}
+.brand-link:hover, .brand-link:focus-visible {
+  background-color: var(--royal);
+  color: var(--frost);
+  outline: none;
+}
+.brand-divider {
+  width: 3px;
+  height: 20px;
+  background-color: var(--uv);
+  display: inline-block;
+  border-radius: 2px;
+}
+
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  list-style: none;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+.nav-menu a {
+  display: inline-block;
+  padding: 6px 14px;
+  text-decoration: none;
+  color: var(--ink);
+  background-color: var(--white);
+  border: 2px solid transparent;
+  border-radius: 999px;
+  white-space: nowrap;
+  font-family: var(--font-display);
+  font-weight: 700;
+  transition: background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease, color 0.15s ease;
+}
+.nav-menu a:hover {
+  background-color: var(--frost);
+  border-color: var(--ink);
+  box-shadow: 2px 2px 0 var(--ink);
+  color: var(--ink);
+  outline: none;
+}
+.nav-menu a.active,
+.nav-menu a[aria-current="page"] {
+  background-color: var(--royal);
+  border: 2px solid var(--ink);
+  box-shadow: var(--shadow-sm);
+  color: var(--frost);
+}
+
+/* ------------------------------------------------------------------
+   5. Main content wrapper
+   ------------------------------------------------------------------ */
+.main-content {
+  max-width: var(--max-width);
+  width: 100%;
+  margin: 0 auto;
+  padding: 28px 20px 64px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+/* ------------------------------------------------------------------
+   6. CSS-only animated geometric borders
+   ------------------------------------------------------------------ */
+@keyframes borderTrace {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.animated-frame {
+  padding: 4px;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(
+    120deg,
+    var(--ink) 0%,
+    var(--royal) 25%,
+    var(--sienna) 50%,
+    var(--lime) 75%,
+    var(--gold) 100%
+  );
+  background-size: 260% 260%;
+  animation: borderTrace 10s linear infinite;
+  box-shadow: var(--shadow-lg);
+}
+@media (prefers-reduced-motion: reduce) {
+  .animated-frame { animation: none; background: var(--ink); }
+}
+
+/* ------------------------------------------------------------------
+   7. Accent system (per-card brand color)
+   ------------------------------------------------------------------ */
+.accent-royal  { --accent: var(--royal);  --accent-ink: var(--frost); }
+.accent-sienna { --accent: var(--sienna); --accent-ink: var(--white); }
+.accent-lime   { --accent: var(--lime);   --accent-ink: var(--white); }
+.accent-gold   { --accent: var(--gold);   --accent-ink: var(--ink); }
+.accent-brick  { --accent: var(--brick);  --accent-ink: var(--ink); }
+.accent-greige { --accent: var(--greige); --accent-ink: var(--ink); }
+
+/* ------------------------------------------------------------------
+   8. Hero board (landing)
+   ------------------------------------------------------------------ */
+.hero-board {
+  background-color: var(--white);
+  border-radius: var(--radius);
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1.25fr 0.9fr;
+}
+.hero-navy-panel {
+  background-color: var(--uv);
+  color: var(--white);
+  padding: 36px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 20px;
+  border-right: var(--border);
+}
+.hero-circle {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+.hero-content-z {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.hero-name {
+  color: var(--white);
+  white-space: nowrap;
+}
+.hero-subtitle {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: var(--ink);
+  background-color: var(--frost);
+  border: var(--border);
+  border-radius: 8px;
+  box-shadow: var(--shadow-md);
+  padding: 12px 16px;
+  line-height: 1.45;
+}
+.hero-bio {
+  color: var(--white);
+  max-width: 62ch;
+}
+.hero-portrait-panel {
+  background-color: var(--white);
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+}
+
+/* ------------------------------------------------------------------
+   9. Portrait card
+   ------------------------------------------------------------------ */
+.portrait-card {
+  border: var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  background-color: var(--frost);
+  width: 100%;
+  max-width: 380px;
+}
+.portrait-card img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  display: block;
+  border-bottom: var(--border);
+}
+.portrait-caption {
+  padding: 10px 14px;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: var(--ink);
+  background-color: var(--white);
+}
+
+/* ------------------------------------------------------------------
+   10. Pill buttons with hard shadows
+   ------------------------------------------------------------------ */
+.cta-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  padding-top: 6px;
+}
+.btn {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-weight: 800;
+  padding: 11px 24px;
+  border: var(--border);
+  border-radius: 999px;
+  box-shadow: var(--shadow-md);
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+.btn:hover, .btn:focus-visible {
+  transform: translate(-1px, -1px);
+  box-shadow: var(--shadow-lg);
+  outline: none;
+}
+.btn-gold   { background-color: var(--gold);   color: var(--ink); }
+.btn-frost  { background-color: var(--frost);  color: var(--ink); }
+.btn-royal  { background-color: var(--royal);  color: var(--white); }
+.btn-sienna { background-color: var(--sienna); color: var(--white); }
+.btn-lime   { background-color: var(--lime);   color: var(--white); }
+.btn-brick  { background-color: var(--brick);  color: var(--ink); }
+.btn-greige { background-color: var(--greige); color: var(--ink); }
+
+/* ------------------------------------------------------------------
+   11. Section banner & four ordered pillar cards
+   ------------------------------------------------------------------ */
+.pillars-section {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+.section-bar {
+  background-color: var(--white);
+  border: var(--border);
+  border-radius: 12px;
+  box-shadow: var(--shadow-md);
+  padding: 14px 22px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.section-bar-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.section-bar-meta {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+.pillar-card-inner {
+  background-color: var(--white);
+  border: var(--border);
+  border-top: 10px solid var(--accent, var(--greige));
+  border-radius: var(--radius);
+  height: 100%;
+  padding: 26px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 18px;
+  box-shadow: var(--shadow-md);
+}
+.pillar-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.pillar-body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.pillar-footer {
+  padding-top: 14px;
+  border-top: 2px solid var(--greige);
+}
+
+/* ------------------------------------------------------------------
+   12. Tags (Space Mono labels)
+   ------------------------------------------------------------------ */
+.pillar-tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  padding: 5px 12px;
+  border: var(--border);
+  border-radius: 8px;
+  box-shadow: var(--shadow-sm);
+  white-space: nowrap;
+}
+.tag-royal  { background-color: var(--royal);  color: var(--frost); }
+.tag-sienna { background-color: var(--sienna); color: var(--white); }
+.tag-lime   { background-color: var(--lime);   color: var(--white); }
+.tag-gold   { background-color: var(--gold);   color: var(--ink); }
+.tag-brick  { background-color: var(--brick);  color: var(--ink); }
+.tag-greige { background-color: var(--greige); color: var(--ink); }
+
+/* ------------------------------------------------------------------
+   13. CW monogram badges
+   ------------------------------------------------------------------ */
+.monogram-badge {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: var(--border);
+  box-shadow: var(--shadow-sm);
+  display: grid;
+  place-items: center;
+  font-family: var(--font-display);
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+/* ------------------------------------------------------------------
+   14. Subpage hero
+   ------------------------------------------------------------------ */
+.page-hero {
+  background-color: var(--uv);
+  color: var(--white);
+  padding: 32px 36px;
+  border-radius: var(--radius);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.page-hero h1 { color: var(--white); position: relative; z-index: 2; }
+.page-hero p { color: var(--frost); max-width: 72ch; position: relative; z-index: 2; }
+.page-hero .cta-group { position: relative; z-index: 2; }
+
+/* ------------------------------------------------------------------
+   15. Content cards
+   ------------------------------------------------------------------ */
+.content-card {
+  background-color: var(--white);
+  border: var(--border);
+  border-top: 8px solid var(--accent, var(--greige));
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  padding: 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* ------------------------------------------------------------------
+   16. Grids
+   ------------------------------------------------------------------ */
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+/* ------------------------------------------------------------------
+   17. Data tables
+   ------------------------------------------------------------------ */
+.data-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  background-color: var(--white);
+  border: var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+}
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+.data-table th,
+.data-table td {
+  padding: 14px 16px;
+  border-bottom: 2px solid var(--greige);
+  vertical-align: top;
+}
+.data-table th {
+  background-color: var(--uv);
+  color: var(--white);
+  font-family: var(--font-display);
+  font-weight: 800;
+  border-bottom: var(--border);
+  white-space: nowrap;
+}
+.data-table tbody tr:nth-child(even) { background-color: var(--frost); }
+.data-table tr:last-child td { border-bottom: 0; }
+
+/* ------------------------------------------------------------------
+   18. Gallery
+   ------------------------------------------------------------------ */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+  gap: 24px;
+}
+.gallery-item {
+  background-color: var(--white);
+  border: var(--border);
+  border-top: 8px solid var(--accent, var(--greige));
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.gallery-item img {
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+  display: block;
+  border-bottom: var(--border);
+  background-color: var(--greige);
+}
+.gallery-meta {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* ------------------------------------------------------------------
+   19. Video frame
+   ------------------------------------------------------------------ */
+.video-frame {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: var(--border);
+  border-radius: 8px;
+  display: block;
+  box-shadow: var(--shadow-sm);
+}
+
+/* ------------------------------------------------------------------
+   20. Footer
+   ------------------------------------------------------------------ */
+.site-footer {
+  background-color: var(--white);
+  border-top: var(--border);
+  margin-top: auto;
+  width: 100%;
+}
+.footer-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 22px 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  align-items: center;
+}
+.ops-link {
+  font-family: var(--font-mono);
+  color: var(--ink);
+  opacity: 0.72;
+  text-decoration: none;
+  border-bottom: 1px dashed var(--ink);
+}
+.ops-link:hover { opacity: 1; color: var(--sienna); }
+
+/* ------------------------------------------------------------------
+   21. Responsive viewports (desktop, tablet, phone)
+   ------------------------------------------------------------------ */
+@media (max-width: 960px) {
+  .hero-board { grid-template-columns: 1fr; }
+  .hero-navy-panel { border-right: 0; border-bottom: var(--border); }
+  .hero-name { white-space: normal; }
+  .pillars-grid { grid-template-columns: 1fr; }
+  .grid-3 { grid-template-columns: 1fr; }
+}
+@media (max-width: 720px) {
+  .nav-container { flex-wrap: wrap; padding: 12px 16px; }
+  .nav-menu { width: 100%; padding-bottom: 4px; }
+  .main-content { padding: 20px 16px 48px; }
+  .hero-navy-panel { padding: 24px 20px; }
+  .page-hero { padding: 26px 22px; }
+}
