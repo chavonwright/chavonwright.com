@@ -15,3 +15,7 @@ chavonwright.com.bak.*
 # Logs
 *.log
 npm-debug.log*
+
+# Local bootstrap/deploy scripts (never ship)
+_dl*.ps1
+_dl*.txt

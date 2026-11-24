@@ -637,3 +637,81 @@ em { font-style: italic; }
   .hero-navy-panel { padding: 24px 20px; }
   .page-hero { padding: 26px 22px; }
 }
+
+/* =====================================================================
+   22. Design cleanup (audit pass)
+   One border weight, soft shadows, no stacked frames, sans labels,
+   no decoration behind text, readable mobile nav, aligned gallery.
+   ===================================================================== */
+:root {
+  --border: 1.5px solid var(--ink);
+  --shadow-sm: 0 1px 2px rgba(58,44,42,.12);
+  --shadow-md: 0 4px 14px rgba(58,44,42,.10);
+  --shadow-lg: 0 8px 24px rgba(58,44,42,.14);
+  --radius: 14px;
+  --radius-lg: 16px;
+}
+
+/* Remove the extra gradient frame; the card itself carries the border */
+.animated-frame { padding: 0; background: none; animation: none; box-shadow: none; border-radius: var(--radius); }
+.hero-board { border: var(--border); box-shadow: var(--shadow-md); }
+.hero-board .hero-navy-panel { border-right: 0; }
+.pillar-card-inner, .content-card, .gallery-item, .data-table-wrap, .section-bar, .portrait-card, .hero-subtitle, .brand-link, .page-hero { box-shadow: none; }
+.pillar-card-inner, .content-card, .gallery-item, .data-table-wrap, .section-bar { border-color: rgba(58,44,42,.28); }
+.pillar-card-inner:hover, .content-card:hover, .gallery-item:hover { box-shadow: var(--shadow-md); }
+.page-hero { box-shadow: var(--shadow-md); }
+
+/* Labels: body typeface, no pill shadows */
+.pillar-tag, .hero-subtitle, .portrait-caption, .section-bar-meta, .ops-link {
+  font-family: var(--font-body);
+  letter-spacing: .01em;
+}
+.pillar-tag { box-shadow: none; border: 0; border-radius: 999px; padding: 4px 14px; }
+.monogram-badge { box-shadow: none; border-width: 0; }
+.hero-subtitle { background: rgba(247,229,224,.14); color: var(--frost); border: 1px solid rgba(247,229,224,.45); font-weight: 700; padding: 10px 16px; }
+.portrait-card { border-color: rgba(58,44,42,.28); }
+
+/* Hero: no decoration behind the name, no dead space */
+.hero-navy-panel .hero-circle:nth-of-type(-n+2) { display: none; }
+.hero-navy-panel { justify-content: center; padding: 44px 40px; }
+.hero-circle { opacity: .9; }
+
+/* Buttons and nav: flat, one hover state */
+.btn { box-shadow: none; border: 0; padding: 12px 26px; }
+.btn:hover, .btn:focus-visible { transform: translateY(-1px); box-shadow: var(--shadow-md); }
+.btn-frost { border: 1.5px solid var(--ink); }
+.brand-link { border: 1.5px solid rgba(58,44,42,.35); }
+.nav-menu a { border: 0; }
+.nav-menu a:hover { background-color: var(--frost); box-shadow: none; }
+.nav-menu a.active, .nav-menu a[aria-current="page"] { border: 0; box-shadow: none; }
+.site-header { border-bottom: 1px solid rgba(58,44,42,.25); box-shadow: 0 2px 10px rgba(58,44,42,.06); }
+.site-footer { border-top: 1px solid rgba(58,44,42,.25); }
+
+/* Cards: slim accent bar */
+.pillar-card-inner { border-top-width: 6px; }
+.content-card, .gallery-item { border-top-width: 5px; }
+.pillar-footer { border-top: 1px solid var(--greige); }
+
+/* Gallery: tags and titles start at the same height in every card */
+.gallery-item { justify-content: flex-start; }
+.gallery-item img { height: 300px; border-bottom: 0; }
+.gallery-meta { padding: 18px 18px 22px; flex: 1; }
+
+/* Tables */
+.data-table th { border-bottom: 0; }
+
+/* Mobile nav: wrap into rows, nothing hidden behind a scrollbar */
+@media (max-width: 960px) {
+  .nav-container { flex-wrap: wrap; justify-content: center; }
+  .nav-menu { flex-wrap: wrap; justify-content: center; overflow: visible; width: 100%; gap: 6px; }
+  .nav-menu a { padding: 6px 12px; }
+}
+@media (max-width: 720px) {
+  .hero-navy-panel { padding: 28px 22px; }
+  .section-bar { flex-direction: column; align-items: flex-start; }
+}
+
+/* Accent bars keep their brand color; decoration stays off text on small screens */
+.pillar-card-inner, .content-card, .gallery-item { border-top-color: var(--accent, var(--greige)); }
+@media (max-width: 720px) { .hero-navy-panel .hero-circle { display: none; } }
+.gallery-item img { object-position: 50% 12%; }
